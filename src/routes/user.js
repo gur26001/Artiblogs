@@ -5,7 +5,7 @@ const Model = require('../model/user.modal');
 
 const router = express.Router();
 const loginSchema = joi.object({
-	email: joi.string().email,
+	email: joi.string().email(),
 	password: joi.string().min(8),
 });
 const registerSchema = joi.object({
@@ -17,7 +17,7 @@ const registerSchema = joi.object({
 
 router.post('/registerUser', async (req, res) => {
 	try {
-		const { error } = await loginSchema.validateAsync(req.body);
+		const { error } = await registerSchema.validateAsync(req.body);
 	} catch (error) {
 		res.status(400).send('Incorrect Email id');
 	}
@@ -54,7 +54,7 @@ router.post('/login', async (req, res) => {
 	const user = await Model.findOne({ email: req.body.email });
 
 	if (!user) {
-		res.status(400).send('Incorrect Email id');
+		res.status(400).send('Email id doesn');
 		return;
 	}
 	const validPassword = await bcrypt.compare(
