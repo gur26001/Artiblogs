@@ -1,6 +1,14 @@
 # GET http://localhost:5000/helloworld
 
 
-GET http://localhost:5000/user/
 
 
+
+
+# GETTING ALL POSTS:
+# GET http://localhost:5000/post/all
+
+
+
+# REGISTERING USERS
+GET http://localhost:5000/user/registerUser

@@ -1,6 +1,7 @@
 const express = require('express');
-const joi=require("joi");
+const joi = require('joi');
 const bcrypt = require('bcryptjs');
+const Model = require('../model/user.modal');
 
 const router = express.Router();
 const loginSchema = joi.object({
@@ -44,7 +45,7 @@ router.post('/registerUser', async (req, res) => {
 		const result = await user.save();
 		res.status(200).send('User Successfully Registered');
 	} catch (error) {
-		res.status(500).send(error);
+		res.status(500).send('this is the error, here.... - > ', error);
 	}
 });
 
@@ -61,8 +62,8 @@ router.post('/login', async (req, res) => {
 		user.password
 	);
 	if (validPassword) {
-		const token = jwt.sign({ _id: user._id }, process.env.Token_Secret);
-		res.header('auth-token', token).send(token);
+		// const token = jwt.sign({ _id: user._id }, process.env.Token_Secret);
+		// res.header('auth-token', token).send(token);
 	} else {
 		res.status(400).send('Invalid Password');
 	}
